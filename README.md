@@ -23,7 +23,9 @@ If it is absent, run `wb git clone --all` from the directory where you want it.
 ```bash
 cd hEDSpace
 git pull --ff-only
-python -m pip install -r requirements.txt
+python -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m ipykernel install --user --name hedspace --display-name 'Python (hEDSpace)'
 wb resource list
 ```
 
@@ -33,7 +35,7 @@ Resources tab or `wb resource list`. Resolve its resource ID with
 do not assume the legacy WORKSPACE_CDR environment variable is present.
 
 ```bash
-python scripts/check_environment.py \
+.venv/bin/python scripts/check_environment.py \
   --project wb-spotless-pecan-6923 \
   --dataset wb-silky-artichoke-2408.C2025Q4R6
 ```
@@ -42,6 +44,12 @@ This checks dataset/table metadata using the cloud app's existing credentials.
 It does not query participant rows or download data. If access fails, confirm the
 appropriate All of Us data collection is attached and your access is current.
 Do not create or download service-account keys.
+
+Use the **Python (hEDSpace)** kernel for notebooks. In a new terminal, run
+`source .venv/bin/activate` from `~/repos/hEDSpace`. The isolated environment avoids
+dependency conflicts with Verily's bundled tools. On November 11, 2026, the cloud
+metadata check verified access to person, condition_occurrence, concept, and
+observation in the configured CDR dataset without querying participant records.
 
 ## Analysis to develop next
 
