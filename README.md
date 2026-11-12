@@ -53,6 +53,15 @@ observation in the configured CDR dataset without querying participant records.
 
 ## Analysis to develop next
 
+Start with [the SNP/indel pilot notebook](notebooks/01_heds_variant_eda.ipynb).
+Its vocabulary discovery cell runs in the existing Jupyter app. Because no cohorts
+have been defined yet, genomic comparisons intentionally require a reviewed
+case/control manifest and a verified dense Hail MatrixTable. Hail cells require
+a supported Spark/Hail app; the current ordinary Jupyter app is not that runtime.
+The notebook includes all eligible manifest cases present in the callset and
+samples up to 500 controls per case. It scans all autosomal sites in the supplied
+callset by default; set INTERVAL for a small smoke test before a larger run.
+
 Define the hEDS phenotype and comparison cohort before training a classifier.
 An EDS diagnosis code alone should not be assumed to identify hEDS specifically.
 Select the CDR release, genomic representation, inclusion criteria, covariates,
